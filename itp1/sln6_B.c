@@ -56,19 +56,18 @@ int main()
 			if(i==12) {
 				if(S[i] && !state) {
 					state=1;
-					continue;
+					break;
 				}
 				if(H[i] && state==1) {
 					state=2;
-					continue;
+					break;
 				}
 				if(C[i] && state==2) {
 					state=3;
-					continue;
+					break;
 				}
 				if(D[i] && state==3) {
 					state=4;
-					continue;
 				}
 			}
 		}
