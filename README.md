@@ -1,4 +1,4 @@
 # AOJ
 My solution of AIZU ONLINE JUDGE's problem collection
 
-Web site ->[AIZU ONLINE JUDGE](http://judge.u-aizu.ac.jp/onlinejudge/finder.jsp?course=ITP1)
+Web site ->[AIZU ONLINE JUDGE](http://judge.u-aizu.ac.jp/onlinejudge/index.jsp)
