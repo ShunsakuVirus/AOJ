@@ -72,6 +72,7 @@ int main()
 			}
 		}
 	}
-
+	
+	free(S);free(H);free(C);free(D);
 	return 0;
 }
