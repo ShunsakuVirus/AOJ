@@ -7,13 +7,13 @@ int main()
 
 	int i,j,add;
 	int storage[r][c];
-	int horizontal[c];
+	int vertical[c];
 
 	for(i=0;i<r;i++) {
 		for(j=0;j<c;j++) {
-			if(i==0)horizontal[j] = 0;
+			if(i==0)vertical[j] = 0;
 			scanf("%d",&storage[i][j]);
-			horizontal[j]+=storage[i][j];
+			vertical[j]+=storage[i][j];
 		}
 	}
 	for(i=0;i<r;i++) {
@@ -26,8 +26,8 @@ int main()
 	}
 	add=0;
 	for(i=0;i<c;i++) {
-		printf("%d ",horizontal[i]);
-		add+=horizontal[i];
+		printf("%d ",vertical[i]);
+		add+=vertical[i];
 	}
 	printf("%d\n",add);
 	return 0;
