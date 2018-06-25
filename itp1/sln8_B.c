@@ -14,9 +14,8 @@ int main()
         if(x[0] == '0') return 0;
         int buff = 0;
         for(i=0;i<MAXDIGITS;i++) {
-            if(x[i] != '\n' && x[i] != '\0') {
-                buff += ((int)x[i])-48;
-            }
+            if(x[i] == '\n') break;
+            buff += ((int)x[i])-48;
         }
         printf("%d\n",buff);
     }
