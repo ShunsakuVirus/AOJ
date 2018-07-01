@@ -19,7 +19,7 @@ int findWord(char s[],char w[],int wordCnt,int fwordCnt) {
             }
         }
     }
-    return -1;
+    return 0;
 }
 
 int main()
