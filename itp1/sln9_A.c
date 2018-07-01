@@ -1,26 +1,44 @@
 #include <stdio.h>
 
-void initArray(char s[], int length) {
+#define W_MAXCHARS 10
+#define T_MAXCHARS 1000
+
+void initStr(char s[], int length) {
     int i;
     for(i=0;i<length;i++) {
         s[i] = '\0';
     }
 }
 
-int findWord(char s[], char w[], int wordCnt, int fwordCnt) {
-    int i,j,diff=0,matchCnt=0;
-    for(i=diff;i<wordCnt;i++) {
-        if(s[i] == '\0') break;
-        if(s[i] == w[0]) {
-            for(j=1;j<fwordCnt;j++) {
-                if(w[j]=='\0') break;
-                if(i+j==wordCnt) break;
-                if(s[i+j]!=w[j]) break;
+int wordCnt(char s[], int max) {
+    int i;
+    for(i=0;i<max;i++) {
+        if(s[i] == '\n') break;
+    }
+    return i;
+}
+
+int find(char T[], char W[], int tlen, int wlen) {
+    int i,j,matchCnt=0;
+    for(i=0;i<tlen;i++) {
+        if(65 <= T[i] && T[i] <= 90) {
+            int offset = 'a' - 'A';
+            T[i] += offset;
+        }
+    }
+
+    for(i=0;i<tlen;i++) {
+        if(T[i] == W[0]) {
+            for(j=1;j<wlen;j++) {
+                if(i+j == tlen) {
+                    break;
+                }
+                if(T[i+j] != W[j]) {
+                    break;
+                }
             }
-            if(j==fwordCnt) {
-                matchCnt ++;
-                diff+=fwordCnt-1;
-                printf("%d\n",diff);
+            if(j==wlen) {
+                matchCnt++;
             }
         }
     }
@@ -29,19 +47,24 @@ int findWord(char s[], char w[], int wordCnt, int fwordCnt) {
 
 int main()
 {
-    char w[11];
-    initArray(w,11);
-    fgets(w,10,stdin);
-
     int matchCnt = 0;
+    int wlen = 0, tlen = 0, elen = 11;
+    char E[11] = "end_of_text";
+    char W[W_MAXCHARS+1];
+    initStr(W,W_MAXCHARS+1);
+    fgets(W,W_MAXCHARS,stdin);
+    wlen = wordCnt(W,W_MAXCHARS);
+
+    char T[T_MAXCHARS+1];
+
     while(1) {
-        char t[1001];
-        initArray(t,1001);
-        fgets(t,1000,stdin);
-        char endWord[12] = "END_OF_TEXT";
-        if(findWord(t,endWord,1000,11)) break;
-        matchCnt = findWord(t,w,1000,10);
+        initStr(T,T_MAXCHARS+1);
+        fgets(T,T_MAXCHARS,stdin);
+        tlen = wordCnt(T,T_MAXCHARS);
+        if(find(T,E,tlen,elen)) break;
+        matchCnt += find(T,W,tlen,wlen);
     }
+
     printf("%d\n",matchCnt);
     return 0;
 }
