@@ -26,14 +26,6 @@ void shuffle(char s[MAXCHARS], int n) {
     for(i=0;i<n;i++) {
         s[end+i] = buff[i];
     }
-    printf("buff = %s\n",buff);
-    for(i=0;i<n;i++) {
-        printf("[%d] \n",buff[i]);
-    }
-    printf("s = %s\n",s);
-    for(i=0;i<MAXCHARS;i++){
-        printf("s[%d] = %d\n",i,s[i]);
-    }
 }
 
 int main()
@@ -44,10 +36,11 @@ int main()
     fgets(deck,MAXCHARS,stdin);
     scanf("%d",&m);
     
-    int h[m];
-    int i;
+    int i,h;
     for(i=0;i<m;i++) {
-        scanf("%d",&h[i]);
+        scanf("%d",&h);
+        shuffle(deck,h);
     }
+    printf("%s\n",deck);
     return 0;
 }
