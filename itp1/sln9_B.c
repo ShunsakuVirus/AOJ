@@ -2,45 +2,59 @@
 
 #define MAXCHARS 200
 
-void shuffle(char s[MAXCHARS], int n) {
+void shuffle(char s[MAXCHARS+1], int n) {
     char buff[n+1];
     int i;
     for(i=0;i<n;i++) {
         buff[i] = s[i];
     }
     buff[n] = 0;
-    for(i=0;i<MAXCHARS;i++) {
-        int flag = s[i+n]==0|s[i+n]==10|(i+n)>=MAXCHARS;
-        if(flag) {
-            puts("Out of range.");
-            s[i+n] = 0;
+    int len=0;
+    while(s[len] != 0) {
+        if(s[len] == 10) {
+            s[len] = 0;
             break;
         }
-        s[i] = s[i+n];
-        s[i+n] = 0;
+        len++;
     }
-    int end = 0;
-    while(s[end] != 0) {
-        end++;
+    int end = len - n;
+    for(i=0;i<end;i++) {
+        s[i] = s[i+n];
     }
     for(i=0;i<n;i++) {
         s[end+i] = buff[i];
     }
 }
 
+void init(char s[MAXCHARS+1]) {
+    int i;
+    for(i=0;i<MAXCHARS+1;i++) {
+        s[i] = 0;
+    }
+}
+
 int main()
 {
     char deck[MAXCHARS+1];
-    int m;
+    init(deck);
 
-    fgets(deck,MAXCHARS,stdin);
-    scanf("%d",&m);
+    while(1) {
+        fgets(deck,MAXCHARS,stdin);
+        int i;
+        for(i=0;i<MAXCHARS+1;i++) {
+            printf("deck[%d] = %d\n",i,deck[i]);
+        }
+        if(deck[0] == '-' && (deck[1] == '\n' || deck[1] == '\0')) break;
+        int m;
+        scanf("%d",&m);
     
-    int i,h;
-    for(i=0;i<m;i++) {
-        scanf("%d",&h);
-        shuffle(deck,h);
+        int h;//i, h;
+        for(i=0;i<m;i++) {
+            scanf("%d",&h);
+            shuffle(deck,h);
+        }
+        //printf("%s\n",deck);
+        //init(deck);
     }
-    printf("%s\n",deck);
     return 0;
 }
